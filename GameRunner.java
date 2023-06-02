@@ -1,4 +1,9 @@
 
+/**
+ * Group 29
+ * Michal Pavlíček, Luuk Dobbelaar
+ * i6306065, i6331748
+ */
 import java.util.Random;
 
 public class GameRunner {

@@ -1,3 +1,9 @@
+/**
+ * Group 29
+ * Michal Pavlíček, Luuk Dobbelaar
+ * i6306065, i6331748
+ */
+
 public class Player {
     private String name;
     private int points;
