@@ -15,10 +15,6 @@ public class Game {
 		questionManager.createQuestions(QUESTION_CATEGORIES, QUESTION_PER_CATEGORY);
 	}
 
-	public boolean isPlayable() {
-		return (players.size() >= 2);
-	}
-
 	public boolean addPlayer(String playerName) {
 		Player newPlayer = new Player(playerName);
 		players.add(newPlayer);
@@ -54,18 +50,14 @@ public class Game {
 			System.out.println(currentPlayer + " is getting out of the penalty box");
 		}
 
-		updatePlayerPosition(roll);
-	}
-
-	private void updatePlayerPosition(int roll) {
 		currentPlayer.updatePosition(roll, BOARD_SIZE);
-
 		System.out.println(currentPlayer
 				+ "'s new location is "
 				+ currentPlayer.getPosition());
 		System.out.println("The category is " + currentCategory());
 
 		System.out.println(questionManager.askQuestion(currentPlayer, QUESTION_CATEGORIES.length));
+
 	}
 
 	private String currentCategory() {
@@ -113,6 +105,7 @@ public class Game {
 		return (currentPlayer.getPoints() == POINTS_TO_WIN);
 	}
 
+	// used for testing only
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
