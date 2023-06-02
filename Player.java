@@ -36,7 +36,7 @@ public class Player {
     }
 
     public void updatePosition(int position, int boardSize) {
-
+        this.position = this.position + position;
         if (this.position > boardSize - 1)
             this.position = this.position - boardSize;
     }

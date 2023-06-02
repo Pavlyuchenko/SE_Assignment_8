@@ -3,28 +3,25 @@ import java.util.Random;
 
 public class GameRunner {
 
-	private static boolean notAWinner;
+	private static boolean hasWon;
 
 	public static void main(String[] args) {
 		Game aGame = new Game();
-		System.out.println(currentCategory(0));
-		aGame.add("Chet");
-		aGame.add("Pat");
-		aGame.add("Sue");
+		aGame.addPlayer("Chet");
+		aGame.addPlayer("Pat");
+		aGame.addPlayer("Sue");
 
 		Random rand = new Random();
 
 		do {
-
 			aGame.roll(rand.nextInt(5) + 1);
 
 			if (rand.nextInt(9) == 7) {
-				notAWinner = aGame.wrongAnswer();
+				hasWon = aGame.answeredWrong();
 			} else {
-				notAWinner = aGame.wasCorrectlyAnswered();
+				hasWon = aGame.answeredCorrect();
 			}
 
-		} while (notAWinner);
-
+		} while (!hasWon);
 	}
 }

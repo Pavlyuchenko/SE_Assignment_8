@@ -7,7 +7,7 @@ public class QuestionManager {
      */
     private ArrayList<ArrayList<String>> questions = new ArrayList<>();
 
-    public ArrayList<ArrayList<String>> createQuestions(String[] questionCategories, int questionsPerCategory) {
+    public void createQuestions(String[] questionCategories, int questionsPerCategory) {
         /*
          * this allows to increase the number of categories without needing to change
          * the code
@@ -17,28 +17,34 @@ public class QuestionManager {
         for (int i = 0; i < questionCategories.length; i++) {
             ArrayList<String> questionNames = new ArrayList<>();
 
-            for (int j = 0; j < questionsPerCategory; j++) {
+            for (int j = 1; j <= questionsPerCategory; j++) {
                 questionNames.add(questionCategories[i] + " Question " + j);
             }
 
             questions.add(questionNames);
         }
 
-        return questions;
+        this.questions = questions;
     }
 
     public ArrayList<ArrayList<String>> getQuestions() {
         return questions;
     }
 
-    public void askQuestion(Player currentPlayer, QuestionManager questionManager, int questionCategoriesLengthh) {
-        int currCategoryIndex = currentPlayer.getPosition() % questionCategoriesLengthh;
+    public String askQuestion(Player currentPlayer, int questionCategoriesLength) {
+        int currCategoryIndex = currentPlayer.getPosition() % questionCategoriesLength;
         int lastQuestionIndex = questions.get(currCategoryIndex).size() - 1;
 
-        String question = questionManager.getQuestions().get(currCategoryIndex)
+        if (lastQuestionIndex < 0) {
+            return "Ran out of questions!";
+        }
+
+        String question = this.getQuestions().get(currCategoryIndex)
                 .remove(lastQuestionIndex);
 
-        System.out.println(question);
+        System.out.println(questions);
+
+        return question;
     }
 
 }

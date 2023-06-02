@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Game {
 	private final int QUESTION_PER_CATEGORY = 50;
@@ -8,18 +7,9 @@ public class Game {
 	private final int POINTS_TO_WIN = 6;
 
 	private QuestionManager questionManager = new QuestionManager();
-
 	private ArrayList<Player> players = new ArrayList<>();
 
-	/*
-	 * private ArrayList<String> players = new ArrayList<>();
-	 * private ArrayList<Integer> playersPositions = new ArrayList<>();
-	 * private ArrayList<Integer> playersPoints = new ArrayList<>();
-	 * private ArrayList<Boolean> inPenaltyBox = new ArrayList<>();
-	 */
-
 	private Player currentPlayer;
-	private boolean isGettingOutOfPenaltyBox;
 
 	public Game() {
 		questionManager.createQuestions(QUESTION_CATEGORIES, QUESTION_PER_CATEGORY);
@@ -38,7 +28,7 @@ public class Game {
 		}
 
 		System.out.println(playerName + " was added");
-		System.out.println("There is currently " + players.size() + " of players in the game");
+		System.out.println("There are currently " + players.size() + " players in the game");
 
 		return true;
 	}
@@ -48,6 +38,7 @@ public class Game {
 			System.out.println("Invalid roll");
 			return;
 		}
+
 		System.out.println(currentPlayer + " is the current player");
 		System.out.println("They have rolled a " + roll);
 
@@ -74,7 +65,7 @@ public class Game {
 				+ currentPlayer.getPosition());
 		System.out.println("The category is " + currentCategory());
 
-		questionManager.askQuestion(currentPlayer, questionManager, QUESTION_CATEGORIES.length);
+		System.out.println(questionManager.askQuestion(currentPlayer, QUESTION_CATEGORIES.length));
 	}
 
 	private String currentCategory() {
@@ -85,14 +76,15 @@ public class Game {
 		if (currentPlayer.isInPenaltyBox()) {
 			nextPlayer();
 			return false;
-		} else {
-			System.out.println("Answer was correct!!!!");
-			currentPlayer.incrementPoints();
-			System.out.println(currentPlayer
-					+ " now has "
-					+ currentPlayer.getPoints()
-					+ " Gold Coins.");
 		}
+
+		currentPlayer.incrementPoints();
+
+		System.out.println("Answer was correct!!!!");
+		System.out.println(currentPlayer
+				+ " now has "
+				+ currentPlayer.getPoints()
+				+ " Gold Coins.");
 		nextPlayer();
 
 		return didPlayerWin();
@@ -113,9 +105,23 @@ public class Game {
 		currentPlayerIndex++;
 		if (currentPlayerIndex == players.size())
 			currentPlayerIndex = 0;
+
+		currentPlayer = players.get(currentPlayerIndex);
 	}
 
 	private boolean didPlayerWin() {
 		return (currentPlayer.getPoints() == POINTS_TO_WIN);
+	}
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public QuestionManager getQuestionManager() {
+		return questionManager;
+	}
+
+	public int getPointsToWin() {
+		return POINTS_TO_WIN;
 	}
 }
