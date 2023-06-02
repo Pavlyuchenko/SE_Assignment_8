@@ -7,7 +7,7 @@ public class GameRunner {
 
 	public static void main(String[] args) {
 		Game aGame = new Game();
-
+		System.out.println(currentCategory(0));
 		aGame.add("Chet");
 		aGame.add("Pat");
 		aGame.add("Sue");

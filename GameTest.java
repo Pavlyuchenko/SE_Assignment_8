@@ -1,9 +1,8 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.*;
 
-public class GameTest {
+public class RollTest {
     @Test
     public void testAddPlayer() {
         assertEquals(true, true);
